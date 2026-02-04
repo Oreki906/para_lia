@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para ti 💛</title>
+
+<!-- Evitar indexación -->
+<meta name="robots" content="noindex, nofollow">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@300;400&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+/* ---------- FONDO ESTRELLADO ---------- */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top, #1b1f3b, #0d1028);
+  color: #f2e9ec;
+  overflow-x: hidden;
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+    radial-gradient(1px 1px at 40% 70%, #fff, transparent),
+    radial-gradient(1px 1px at 70% 20%, #fff, transparent),
+    radial-gradient(1px 1px at 90% 80%, #fff, transparent),
+    radial-gradient(2px 2px at 60% 50%, #fff, transparent);
+  background-size: 200px 200px;
+  opacity: 0.4;
+  animation: moveStars 60s linear infinite;
+  z-index: -1;
+}
+
+@keyframes moveStars {
+  from { transform: translateY(0); }
+  to { transform: translateY(-200px); }
+}
+
+/* ---------- PUERTA ---------- */
+#gate {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.gate-card {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(12px);
+  padding: 30px 25px;
+  border-radius: 22px;
+  text-align: center;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.gate-card h1 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 10px;
+  color: #ffe6f0;
+}
+
+.gate-card p {
+  font-size: 0.95em;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  text-align: center;
+}
+
+button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 14px;
+  background: #b5838d;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #9d6b75;
+}
+
+#error {
+  margin-top: 12px;
+  font-size: 0.85em;
+  color: #ffb3c1;
+  display: none;
+}
+
+/* ---------- CONTENIDO ---------- */
+#content {
+  display: none;
+}
+
+section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+h1, h2 {
+  font-family: 'Playfair Display', serif;
+  color: #ffe6f0;
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero h1 {
+  font-size: 2.2em;
+}
+
+.hero p {
+  font-size: 1.1em;
+  margin-top: 10px;
+}
+
+.card {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 25px;
+  margin: 20px auto;
+  max-width: 600px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+.timeline {
+  text-align: left;
+}
+
+.event {
+  margin-bottom: 25px;
+}
+
+.event span {
+  font-weight: bold;
+  color: #f3c4fb;
+}
+
+/* ---------- GALERÍA ---------- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 14px;
+  object-fit: cover;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  transition: transform 0.4s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+}
+
+/* ---------- ANIMACIONES ---------- */
+.fade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s ease;
+}
+
+.fade.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* ---------- LIGHTBOX ---------- */
+#lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 30, 0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+#lightbox img {
+  max-width: 92%;
+  max-height: 85%;
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+/* ---------- CORAZONES ---------- */
+.heart {
+  position: fixed;
+  width: 18px;
+  height: 18px;
+  background: #ff8fab;
+  transform: rotate(45deg);
+  animation: floatUp 1.5s ease-out forwards;
+  z-index: 1000;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #ff8fab;
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -9px;
+  left: 0;
+}
+
+.heart::after {
+  left: -9px;
+  top: 0;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(45deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-80px) rotate(45deg) scale(1.4);
+  }
+}
+/* ---------- BOTÓN FLORES ---------- */
+.flower-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 14px 26px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #c77dff, #9d4edd);
+  color: white;
+  text-decoration: none;
+  font-size: 1em;
+  font-weight: 400;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.flower-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.45);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<!-- ---------- PUERTA ---------- -->
+<div id="gate">
+  <div class="gate-card">
+    <h1>De Alejandro</h1>
+    <p>
+      Esto no es una página cualquiera.  
+      Es un pequeño universo que hice con cariño,  
+      y solo quiero que lo vea la persona correcta
+      Y ademas por seguridad informatica XD
+    </p>
+
+    <input type="password" id="key" placeholder="Tu apodo">
+    <button onclick="openGate()">Entrar</button>
+    <div id="error">Esa no es… pero está bien intentarlo 🤍</div>
+  </div>
+</div>
+
+<!-- ---------- CONTENIDO ---------- -->
+<div id="content">
+
+  <section class="hero fade">
+    <h1>Feliz cumpleaños, ✨Lia✨</h1>
+    <p>Hoy celebro tu vida… y lo afortunado que soy de tenerte en la mía.</p>
+  </section>
+
+  <section class="card fade">
+    <h2>Para ti 💌</h2>
+    <p>
+      No importa la distancia, hay personas que se quedan cerca  
+      simplemente por la forma en que nos hacen sentir.  
+      Tú eres una de ellas
+    </p>
+  </section>
+
+ 
+
+  <section class="card fade">
+    <h2>Algunos recuerdos 📸</h2>
+
+    <div class="gallery">
+      <img src="img/recuerdo1.jpg" alt="Recuerdo 1"onclick="openLightbox(this.src)">
+      <img src="img/recuerdo2.jpg" alt="Recuerdo 2"onclick="openLightbox(this.src)">
+      <img src="img/recuerdo3.jpg" alt="Recuerdo 3"onclick="openLightbox(this.src)">
+      <img src="img/recuerdo4.jpg" alt="Recuerdo 4"onclick="openLightbox(this.src)">
+    </div>
+
+    <p style="margin-top:15px; font-size:0.9em;">
+      No son solo fotos…  
+      son momentos que guardo con cariño.
+    </p>
+  </section>
+
+  <section class="card fade">
+    <h2>Un deseo</h2>
+    <p>
+      Que este nuevo año te trate con la misma dulzura  
+      que tú le das al mundo.  
+      Y que nunca dudes de lo valiosa que eres.
+    </p>
+  </section>
+  <section class="card fade">
+  <h2>Un último detalle 🌸</h2>
+  <p>
+    Si llegaste hasta aquí,  
+    hay algo más que quiero mostrarte.
+  </p>
+
+  <a href="https://flores-moradas-para-ti.netlify.app" target="_blank" class="flower-btn">
+    Para ti 💜
+  </a>
+</section>
+
+</div>
+
+<script>
+/* ---------- PUERTA ---------- */
+const PASSWORD = "lia"; // 👈 CAMBIA ESTO
+
+function openGate() {
+  const input = document.getElementById("key").value.trim().toLowerCase();
+  const error = document.getElementById("error");
+
+  if (input === PASSWORD) {
+    document.getElementById("gate").style.display = "none";
+    document.getElementById("content").style.display = "block";
+  } else {
+    error.style.display = "block";
+  }
+}
+
+/* ---------- FADE ---------- */
+const faders = document.querySelectorAll('.fade');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    }
+  });
+}, { threshold: 0.2 });
+
+faders.forEach(fade => observer.observe(fade));
+</script>
+<script>
+function openLightbox(src) {
+  const lightbox = document.getElementById("lightbox");
+  const img = document.getElementById("lightbox-img");
+  img.src = src;
+  lightbox.style.display = "flex";
+}
+
+function closeLightbox() {
+  document.getElementById("lightbox").style.display = "none";
+}
+</script>
+<script>
+document.addEventListener("click", function (e) {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+
+  heart.style.left = e.clientX - 9 + "px";
+  heart.style.top = e.clientY - 9 + "px";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 1500);
+});
+</script>
+
+<!-- VISOR DE IMÁGENES -->
+<div id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" src="">
+</div>
+</body>
+</html>
